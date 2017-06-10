@@ -1,0 +1,39 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+         http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+	<import resource="classpath:/META-INF/spring-context/dao-web.xml" />
+	<import resource="classpath:/META-INF/spring-context/datasource.xml" />
+	<context:annotation-config />
+	<context:component-scan
+		base-package="com.devappsol.sbm.sbmfundrequisition.controller,com.devappsol.sbm.sbmfundrequisition.dao,com.devappsol.sbm.sbmfundrequisition.model,com.devappsol.sbm.sbmfundrequisition.model.login,com.devappsol.sbm.sbmfundrequisition.service,com.devappsol.sbm.sbmfundrequisition.interfaces.dao,com.devappsol.sbm.sbmfundrequisition.interfaces.service" />
+	<context:component-scan	base-package="com.devappsol.sbm"/>
+	<mvc:annotation-driven />
+	<mvc:resources location="/" mapping="/**" />
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/pages/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="31457280" />
+	</bean>
+
+	<!-- <bean id="propertyConfigurer" class="com.devappsol.sbm.util.SBMPropertyConfigurer" 
+		scope="singleton" lazy-init="false"> <property name="fileName" value="web-application.properties" 
+		/> </bean> -->
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:/context.properties</value>
+		</property>
+		
+	</bean>
+</beans>
+ 	

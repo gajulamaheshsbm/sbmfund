@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:util="http://www.springframework.org/schema/util"
+ xsi:schemaLocation="
+ http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+ http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd ">
+	
+<bean id="jpaVendorAdapter"
+ class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+    <property name="generateDdl" value="${db_generateDdl}"/>
+    <property name="showSql" value="${db_showSql}"/>
+    <property name="databasePlatform" value="${db_dialect}"/>
+</bean>
+
+<util:map id="poolingMap">
+    <entry key="hibernate.hbm2ddl.auto" value="${db_auto}"/>
+    <entry key="hibernate.connection.pool_size" value="${db_pool_size}"/>
+      <entry key="org.hibernate.envers.store_data_at_delete" value="true"></entry>
+    <entry key="hibernate.dbcp.maxActive" value="${db_maxActive}"/>
+    <entry key="hibernate.dbcp.maxIdle" value="${db_maxIdle}"/>
+    <entry key="hibernate.dbcp.ps.maxWait" value="${db_maxWait}"/>
+    <entry key="hibernate.dbcp.ps.maxActive" value="${db_maxActive}"/>
+    <entry key="hibernate.connection.autocommit" value="${db_autoCommit}"/>
+</util:map>
+</beans>
